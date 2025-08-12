@@ -1,0 +1,36 @@
+plugins {
+    id 'java'
+    id 'application'   // ← 실행 태스크용
+}
+
+group = 'com.bookclub'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17) // 로컬 JDK에 맞추기
+    }
+}
+
+application {
+    mainClass = 'com.conycomy.Main' // ← 네 메인 클래스
+}
+
+tasks.jar {
+    manifest {
+        attributes 'Main-Class': application.mainClass.get()
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
