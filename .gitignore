@@ -202,4 +202,19 @@ $RECYCLE.BIN/
 # End of https://www.toptal.com/developers/gitignore/api/java,macos,intellij,windows
 
 
-*.idea
+*.idea# Build caches & outputs
+.gradle/
+build/
+caches/
+daemon/
+native/
+wrapper/
+
+# IntelliJ / IDEA
+.idea/
+*.iml
+out/
+
+# OS / temp
+.DS_Store
+.tmp/
