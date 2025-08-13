@@ -11,7 +11,7 @@ public interface Librarian {
 
     public Optional<BookSearchResult> findBook(String title, int requiredStock);
 
-    public void saveRentalRecord(Member member, Book book);
+    public void saveRentalRecord(Member member, Book book, int quantity);
 
     public List<Book> getAllRentalTitles();
 

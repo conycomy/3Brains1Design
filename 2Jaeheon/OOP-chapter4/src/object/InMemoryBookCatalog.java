@@ -33,11 +33,11 @@ public class InMemoryBookCatalog implements BookCatalog {
     }
 
     @Override
-    public void decreaseStock(Book book) {
+    public void decreaseStock(Book book, int quantity) {
         if (!inventory.isEmpty()) {
             int currentStock = inventory.get(book);
-            if (currentStock > 0) {
-                inventory.put(book, currentStock - 1);
+            if (currentStock >= quantity) {
+                inventory.put(book, currentStock - quantity);
             }
         }
     }

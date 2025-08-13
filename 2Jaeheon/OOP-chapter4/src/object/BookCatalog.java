@@ -7,5 +7,5 @@ public interface BookCatalog {
 
     public Map<Book, Integer> searchAvailableBook(String title);
 
-    void decreaseStock(Book book); // 재고 감소
+    void decreaseStock(Book book, int quantity);
 }

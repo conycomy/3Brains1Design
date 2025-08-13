@@ -28,8 +28,8 @@ public class DefaultLibrarian implements Librarian {
     }
 
     @Override
-    public void saveRentalRecord(Member member, Book book) {
-        bookCatalog.decreaseStock(book); // 재고를 줄이고 저장
+    public void saveRentalRecord(Member member, Book book, int quantity) {
+        bookCatalog.decreaseStock(book, quantity); // 재고를 줄이고 저장
         bookRentalHistory.save(member, book);
     }
 
