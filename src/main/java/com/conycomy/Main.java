@@ -9,6 +9,7 @@ public class Main {
 
 	public static void main(String[] args) {
 
+
 		// 1) BookCatalog: 요청은 무시하고 하드코딩된 10개 가용성 응답을 그대로 반환
 		BookCatalog catalog = new BookCatalog() {
 			@Override
@@ -99,7 +100,10 @@ public class Main {
 			}
 		};
 
-		// 4) 조립 및 실행
+
+
+
+
 		Librarian librarian = new DefaultLibrarian(catalog, history);
 		librarian.lendBooksTo(member);
 	}
