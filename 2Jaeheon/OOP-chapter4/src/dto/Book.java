@@ -1,33 +1,27 @@
 package dto;
 
+import java.util.Date;
+
 public class Book {
 
-    private Long bookNumber;
-    private String title;
-    private String author;
-    private String publisher;
+    String bookTitle;
+    String author;
+    Date publishedDate;
+    int price;
 
-    public Book(Long bookNumber, String title, String author, String publisher) {
-        this.bookNumber = bookNumber;
-        this.title = title;
+    public Book(String bookTitle, String author, Date publishedDate, int price) {
+        this.bookTitle = bookTitle;
         this.author = author;
-        this.publisher = publisher;
+        this.publishedDate = publishedDate;
+        this.price = price;
     }
 
-    public Long getBookNumber() {
-        return bookNumber;
+    public String getBookTitle() {
+        return bookTitle;
     }
 
-    public void setBookNumber(Long bookNumber) {
-        this.bookNumber = bookNumber;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
+    public void setBookTitle(String bookTitle) {
+        this.bookTitle = bookTitle;
     }
 
     public String getAuthor() {
@@ -38,21 +32,29 @@ public class Book {
         this.author = author;
     }
 
-    public String getPublisher() {
-        return publisher;
+    public Date getPublishedDate() {
+        return publishedDate;
     }
 
-    public void setPublisher(String publisher) {
-        this.publisher = publisher;
+    public void setPublishedDate(Date publishedDate) {
+        this.publishedDate = publishedDate;
     }
-    
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
     @Override
     public String toString() {
         return "Book{" +
-            "bookNumber=" + bookNumber +
-            ", title='" + title + '\'' +
+            "bookTitle='" + bookTitle + '\'' +
             ", author='" + author + '\'' +
-            ", publisher='" + publisher + '\'' +
+            ", publishedDate=" + publishedDate +
+            ", price=" + price +
             '}';
     }
 }
