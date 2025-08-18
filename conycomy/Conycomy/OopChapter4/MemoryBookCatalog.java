@@ -1,16 +1,21 @@
 package Conycomy.OopChapter4;
+
 import Conycomy.OopChapter4.dto.Availability;
 import Conycomy.OopChapter4.dto.Book;
 import Conycomy.OopChapter4.dto.BookRequest;
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.*;
 
 public class MemoryBookCatalog implements BookCatalog {
 
-	private final List<Book> books;
+	private final Map<String, List<Book>> catalog; // title 기준으로 도서 분류
 
 	public MemoryBookCatalog(List<Book> books) {
-		this.books = books;
+		this.catalog = new HashMap<>();
+		for (Book book : books) {
+			String key = book.title().toLowerCase(); // title을 소문자로 통일하여 key 사용
+			catalog.computeIfAbsent(key, k -> new ArrayList<>()).add(book);
+		}
 	}
 
 	@Override
@@ -18,34 +23,28 @@ public class MemoryBookCatalog implements BookCatalog {
 		List<Availability> result = new ArrayList<>();
 
 		for (BookRequest bookRequest : requests) {
-			boolean isAvailable = false;
+			String key = bookRequest.title().toLowerCase();
+			List<Book> candidateBooks = catalog.getOrDefault(key, Collections.emptyList());
 
-			for (Book book : books) {
-				if (book.title().equalsIgnoreCase(book.title())
-					&& book.author().equalsIgnoreCase(book.author())) {
+			Optional<Book> matchedBook = candidateBooks.stream()
+				.filter(book -> book.author().equalsIgnoreCase(bookRequest.author()))
+				.findFirst();
 
-					Availability availability = new Availability(
-						bookRequest,
-						Availability.Status.AVAILABLE,
-						book
-					);
-					result.add(availability);
-					isAvailable = true;
-					break;
-				}
-			}
-
-			if (!isAvailable) {
-				Availability availability = new Availability(
+			if (matchedBook.isPresent()) {
+				result.add(new Availability(
 					bookRequest,
 					Availability.Status.AVAILABLE,
+					matchedBook.get()
+				));
+			} else {
+				result.add(new Availability(
+					bookRequest,
+					Availability.Status.UNAVAILABLE,
 					null
-
-				);
-				result.add(availability);
-
+				));
 			}
 		}
+
 		return result;
 	}
 }
